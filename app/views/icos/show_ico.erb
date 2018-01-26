@@ -1,0 +1,15 @@
+
+<h3> <%= @ico.ticker %> </h3>
+<h3> <%= @ico.name %> </h3>
+<h3> <%= @ico.ico_date %> </h3>
+<h3> <%= @ico.whitelist? %> </h3>
+
+<div>
+<form action="/icos/<%= @ico.id %>/delete" method="GET">
+	<input type="submit" value="Delete ICO">
+</form>
+
+<form action="/icos/<%= @ico.id %>/edit" method="GET">
+	<input type="submit" value="Edit ICO">
+</form>
+</div>

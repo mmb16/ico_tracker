@@ -1,0 +1,16 @@
+<h1> Welcome, <%= @user.username %> </h1>
+
+<% @icos.each do |ico|%>
+<h3> <%= ico.ticker.to_s %> </h3>
+<h3> <%= ico.name.to_s %> </h3>
+<h3> <%= ico.ico_date.to_s %> </h3>
+<h3> <%= ico.whitelist?.to_s %> </h3>
+<% end %>
+
+<form action="/icos/new" method="GET">
+	<input type="submit" value="Add ICO">
+</form>
+
+<form action="/logout" method="GET">
+	<input type="submit" value="Log Out">
+</form>

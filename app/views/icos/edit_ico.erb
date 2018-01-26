@@ -1,0 +1,10 @@
+<h3>Edit ICO Information</h3>
+
+<%= @ico.name %>
+<form action="/icos/<%= @ico.id %>/edit" method="POST">
+	<input type="text" name="ticker" placeholder="<%= @ico.ticker %>">
+	<input type="text" name="name" placeholder="<%= @ico.name %>">
+	<input type="date" name="date" placeholder="<%= @ico.ico_date %>">
+	<input type="boolean" name="whitelist?" placeholder="<%= @ico.whitelist? %>">
+  <input type="submit" id="submit" value="Update ICO">
+</form>
