@@ -15,6 +15,7 @@ post '/signup' do
     session[:user_id] = @user.id
     redirect to '/icos'
   end
+  "Please fill in all fields"
   redirect to '/signup'
 end
 
