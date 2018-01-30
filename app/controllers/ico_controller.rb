@@ -2,7 +2,7 @@ require 'pry'
 class IcoController < ApplicationController
 get '/icos' do
   if logged_in?
-    @user = User.find_by_id(session[:user_id])
+    @user = User.find_by(session[:user_id])
     @icos = Ico.all
     erb :'/icos/icos'
   else
@@ -37,7 +37,7 @@ end
 
 get "/icos/:id" do
   if logged_in?
-    @ico = Ico.find_by_id(params[:id])
+    @ico = Ico.find_by(params[:id])
     erb :'/icos/show_ico'
   else
     redirect to '/login'
@@ -46,7 +46,8 @@ end
 
 get "/icos/:id/edit" do
   if logged_in?
-    @ico = Ico.find_by_id(params[:id])
+    @ico = Ico.find_by(params[:id])
+    binding.pry
     if @ico.user_id == session[:user_id]
       erb :'/icos/edit_ico'
     else
@@ -60,7 +61,7 @@ end
 post "/icos/:id/edit" do
   if logged_in?
     if params[:name] != "" && params[:ticker] != "" && params[:ico_date] != "" && params[:whitelist] != ""
-      @ico = Ico.find_by_id(params[:id])
+      @ico = Ico.find_by(params[:id])
       @ico.name = params[:name]
       @ico.ico_date = params[:ico_date]
       @ico.whitelist = params[:whitelist]
@@ -77,7 +78,7 @@ end
 
 get "/icos/:id/delete" do
   if logged_in?
-    @ico = Ico.find_by_id(params[:id])
+    @ico = Ico.find_by(params[:id])
     if @ico.user_id == session[:user_id]
       @ico.delete
     end
