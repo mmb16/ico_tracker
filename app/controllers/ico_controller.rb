@@ -59,7 +59,7 @@ end
 
 post "/icos/:id/edit" do
   if logged_in?
-    if params[:name] != "" || params[:ticker] != "" || params[:ico_date] != "" || params[:whitelist] != ""
+    if params[:name] != "" && params[:ticker] != "" && params[:ico_date] != "" && params[:whitelist] != ""
       @ico = Ico.find_by_id(params[:id])
       @ico.name = params[:name]
       @ico.ico_date = params[:ico_date]
