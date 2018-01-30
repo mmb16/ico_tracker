@@ -2,7 +2,7 @@ require 'pry'
 class IcoController < ApplicationController
 get '/icos' do
   if logged_in?
-    @user = User.find_by(session[:user_id])
+    @user = User.find_by_id(session[:user_id])
     @icos = Ico.all
     erb :'/icos/icos'
   else
@@ -47,7 +47,6 @@ end
 get "/icos/:id/edit" do
   if logged_in?
     @ico = Ico.find_by(params[:id])
-    binding.pry
     if @ico.user_id == session[:user_id]
       erb :'/icos/edit_ico'
     else
