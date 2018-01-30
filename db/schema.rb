@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20180125172447) do
     t.string "ticker"
     t.string "name"
     t.date "ico_date"
-    t.boolean "whitelist?"
+    t.boolean "whitelist"
     t.integer "user_id"
   end
 

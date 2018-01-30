@@ -1,4 +1,4 @@
-
+require 'pry'
 class IcoController < ApplicationController
 get '/icos' do
   if logged_in?
@@ -47,7 +47,11 @@ end
 get "/icos/:id/edit" do
   if logged_in?
     @ico = Ico.find_by_id(params[:id])
-    erb :'/icos/edit_ico'
+    if @ico.user_id == session[:user_id]
+      erb :'/icos/edit_ico'
+    else
+      "You are not allowed to edit this ICO"
+    end
   else
     redirect to '/login'
   end
@@ -55,12 +59,17 @@ end
 
 post "/icos/:id/edit" do
   if logged_in?
-    if params[:name] != ""
+    if params[:name] != "" || params[:ticker] != "" || params[:ico_date] != "" || params[:whitelist] != ""
       @ico = Ico.find_by_id(params[:id])
       @ico.name = params[:name]
+      @ico.ico_date = params[:ico_date]
+      @ico.whitelist = params[:whitelist]
+      @ico.ticker = params[:ticker]
       @ico.save
+      redirect to "/icos/#{@ico.id}"
+    else
+      "Please fill in all fields"
     end
-    redirect to "/icos/#{@ico.id}"
   else
     redirect to '/login'
   end
